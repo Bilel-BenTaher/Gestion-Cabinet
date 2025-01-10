@@ -1,0 +1,17 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<center>  <!-- Aligne tout le contenu à l'intérieur du conteneur au centre -->
+<div style=" margin-bottom: 80px;">  <!-- Ajoute un espace de 72px au-dessus -->
+<div class="container" class="form-horizontal" style="margin-top: 50px;">  <!-- Conteneur pour le formulaire avec un espacement en haut de 50px -->
+    <form method="post">{% csrf_token %}  <!-- Formulaire avec la méthode 'POST' pour envoyer les données et protection contre les attaques CSRF -->
+        <p>Etes-vous sûr de vouloir supprimer ce rendez-vous ?</p>  <!-- Message demandant confirmation avant la suppression -->
+        
+        <input type="submit" value="Supprimer" class="btn btn-danger" />  <!-- Bouton de soumission pour supprimer le rendez-vous, avec un style de bouton rouge (btn-danger) -->
+        
+        <!-- Lien pour annuler l'action et revenir à la liste des rendez-vous -->
+        <a href="{% url 'rdv_list' %}" class="btn btn-primary">Annuler</a>  <!-- Bouton pour annuler la suppression et revenir à la liste des rendez-vous, avec un style de bouton bleu (btn-primary) -->
+    </form>
+</div>
+</div>
+</center>
+{% endblock %}  <!-- Fin du bloc 'content' -->

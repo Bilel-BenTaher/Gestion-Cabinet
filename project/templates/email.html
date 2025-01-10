@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Définition de la vue responsive pour une compatibilité optimale sur mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Encodage UTF-8 pour supporter les caractères spéciaux -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Réinitialisation du mot de passe</title>
+
+    <style>
+        /* RESET GLOBAUX pour garantir une mise en page uniforme sur différents navigateurs */
+        img {
+            border: none;
+            -ms-interpolation-mode: bicubic; /* améliore l’affichage des images sur les navigateurs IE */
+            max-width: 100%; /* Empêche les images de déborder */
+        }
+
+        body {
+            background-color: #f4f6f9; /* Couleur de fond douce pour l’email */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased; /* Améliore la lisibilité des polices sur les appareils Apple */
+        }
+
+        table {
+            border-collapse: collapse; /* Enlève les espaces entre les cellules du tableau */
+            width: 100%; /* Prend toute la largeur disponible */
+        }
+
+        table td {
+            vertical-align: top; /* Alignement vertical des cellules */
+        }
+
+        .container {
+            max-width: 600px; /* Largeur maximale du contenu */
+            margin: 0 auto; /* Centrage horizontal */
+            padding: 20px;
+            background-color: #ffffff; /* Fond blanc pour le contenu */
+            border-radius: 8px; /* Coins arrondis */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet d’élévation */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px; /* Espacement sous l’en-tête */
+        }
+
+        .header h1 {
+            color: #333; /* Couleur sombre pour le titre */
+            font-size: 24px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .content {
+            color: #555; /* Texte dans une couleur gris foncé */
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .content p {
+            margin: 15px 0; /* Espacement entre les paragraphes */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #3498db; /* Couleur de fond du bouton */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px; /* Coins arrondis du bouton */
+            font-weight: 600;
+            text-transform: uppercase; /* Texte en majuscules */
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px; /* Espacement au-dessus du pied de page */
+            font-size: 12px;
+            color: #888; /* Couleur du texte du pied de page */
+        }
+
+        .footer a {
+            color: #3498db; /* Lien en couleur bleue */
+            text-decoration: none;
+        }
+
+        /* Réduction de la taille des éléments pour les écrans mobiles */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 15px; /* Moins de padding sur les petits écrans */
+            }
+
+            .header h1 {
+                font-size: 20px; /* Taille du titre réduite sur mobile */
+            }
+
+            .content p {
+                font-size: 14px; /* Réduction de la taille du texte */
+            }
+
+            .button {
+                padding: 12px 25px; /* Bouton plus petit sur mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <table role="presentation" class="body">
+        <tr>
+            <td>&nbsp;</td> <!-- Espacement inutile, peut être supprimé -->
+            <td class="container">
+                <div class="header">
+                    <h1>Réinitialisation de votre mot de passe</h1>
+                </div>
+                <div class="content">
+                    <p>Bonjour,</p>
+                    <p>Nous avons bien reçu une demande pour réinitialiser votre mot de passe. Si vous êtes à l'origine de cette demande, veuillez cliquer sur le bouton ci-dessous pour poursuivre la réinitialisation.</p>
+                    <p>Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email.</p>
+                    <!-- Lien vers la page de réinitialisation du mot de passe -->
+                    <a href="{{domaine}}{% url 'update_password' token=token uid=uid %}" class="button">Réinitialiser mon mot de passe</a>
+                </div>
+                <div class="footer">
+                    <p>Merci de votre confiance.</p>
+                </div>
+            </td>
+            <td>&nbsp;</td> <!-- Espacement inutile, peut être supprimé -->
+        </tr>
+    </table>
+</body>
+</html>

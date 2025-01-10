@@ -1,0 +1,40 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<center>  <!-- Aligne tout le contenu à l'intérieur du conteneur au centre -->
+
+    {% if no_rdv_message %}  <!-- Si un message spécifique (no_rdv_message) est présent dans le contexte -->
+    <div style=" margin-bottom: 72px;">  <!-- Ajoute un espace de 72px au-dessus -->
+    <h3>Bonjour,</h3>  <!-- Affiche un titre de salutation -->
+    <p>{{ no_rdv_message }}</p>  <!-- Affiche le message informatif lié à l'absence de rendez-vous -->
+    
+    {% if show_button %}  <!-- Si la variable 'show_button' est vraie (indiquant que le bouton doit être affiché) -->
+        <a href="{% url 'rdv_new'%}" class="btn btn-primary">Ajouter un rendez-vous</a>  <!-- Lien permettant d'ajouter un rendez-vous, stylisé comme un bouton -->
+    {% endif %}
+  </div>
+    
+    {% else %}  <!-- Si le message 'no_rdv_message' n'est pas défini, donc un rendez-vous existe -->
+    <h1>Votre rendez-vous</h1>  <!-- Titre pour afficher les détails du rendez-vous -->
+    <table class="table">  <!-- Tableau pour afficher les informations du rendez-vous -->
+        <tr>
+            <th>Date et Heure du Rdv</th>  <!-- Colonne pour la date et l'heure du rendez-vous -->
+            <th>Numéro du Rdv</th>  <!-- Colonne pour le numéro du rendez-vous -->
+            <th>Supprimer</th>  <!-- Colonne pour le bouton de suppression -->
+        </tr>
+        {% for rdv in object_list %}  <!-- Boucle sur chaque objet 'rdv' dans la liste des rendez-vous -->
+        <tr>  
+            <td>{{ rdv.date }} à {{ rdv.time }}</td>  <!-- Affiche la date et l'heure du rendez-vous -->
+            <td>Vous êtes à la position {{ rdv.num_rdv }} dans la journée.</td>  <!-- Affiche la position du rendez-vous dans la journée -->
+            <td>
+                <a href="{% url 'rdv_delete' rdv.id %}" class="btn btn-danger">Supprimer</a>  <!-- Lien pour supprimer le rendez-vous, stylisé comme un bouton rouge (danger) -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="color: red; margin-top: 15px;">  <!-- Message d'information en rouge -->
+        Si vous souhaitez modifier ou ajouter un rendez-vous, supprimez le rendez-vous existant et suivez les instructions pour en créer un nouveau.
+    </p>
+    {% endif %}
+
+</center>  <!-- Fermeture du centrage -->
+{% endblock %}  <!-- Fin du bloc 'content' -->

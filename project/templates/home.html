@@ -1,0 +1,162 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' pour hériter de la structure générale -->
+
+{% block banner_content %}  <!-- Début du bloc pour le contenu spécifique de la section banner (bannière) -->
+
+<style>
+	.navbar-default {
+		background-color: transparent;      
+		border: 0px;              
+	}
+	.top-nav-collapse {
+    padding: 0;                      
+    background: rgba(28,74,90, 0.9);  
+}
+</style>
+
+<!-- Le reste de votre contenu pour la page d'accueil -->
+{% load static %}  <!-- Charge les fichiers statiques pour pouvoir accéder aux images, CSS, JS, etc. -->
+
+<section id="home" >  <!-- Section principale de la bannière de la page d'accueil -->
+    <div class="bg-color" >  <!-- Section avec fond coloré -->
+        <div class="container">  <!-- Conteneur pour centrer le contenu -->
+            <div class="row">  <!-- Ligne pour organiser les éléments -->
+                <div class="banner-info">  <!-- Information principale de la bannière -->
+                    <div class="banner-logo text-center">  <!-- Affichage du logo de l'entreprise au centre -->
+                        <img src="{% static 'img/logo1.png' %}" class="img-responsive" style="max-width: 500px; height: auto;">  <!-- Image du logo, avec taille contrôlée -->
+                    </div>
+                    <div class="banner-text text-center">  <!-- Texte de la bannière -->
+                        <h1 class="white">Votre santé, notre priorité : <br> gérez vos rendez-vous en toute simplicité !</h1>  <!-- Titre principal -->
+                        {% if not request.user.is_authenticated %}  <!-- Si l'utilisateur n'est pas connecté -->
+                            <a href="/signup" class="btn btn-appoint">S'inscrire</a>  <!-- Lien pour l'inscription -->
+                            <p class="white">Inscrivez-vous en quelques clics et profitez d'une gestion rapide et facile de vos rendez-vous médicaux !</p>  <!-- Message pour encourager l'inscription -->
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section "À propos du Médecin" -->
+<section id="about" class="section-padding" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; background: linear-gradient(135deg, #f2f2f2, #e6e6e6); padding: 50px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="ser-title" style="display: inline-block; margin-bottom: 10px; margin-top: 20px;">À propos du Médecin</h2>  <!-- Titre pour la section "À propos du médecin" -->
+                <hr class="botm-line" style="margin: 0 auto; width: calc(100% - 20px);">  <!-- Ligne de séparation centrée et ajustée -->
+            </div>			
+        </div>
+        <div class="row" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;">
+            <div class="col-md-4 col-sm-6 col-xs-12" style="margin: 10px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: #fff;">
+                <!-- Section affichant les informations du médecin -->
+                <div class="thumbnail" style="text-align: center;">
+                    <img src="{% static 'img/doctor.jpg' %}" alt="Doctor Image" class="team-img img-responsive" style="margin: 0 auto; border-radius: 10px; max-width: 50%; height: auto;">  <!-- Photo du médecin -->
+                    <div class="caption">
+                        <h3 style="font-weight: bold;">Foulen <br> BEN FALTEN</h3>  <!-- Nom du médecin -->
+                        <p style="font-size: 16px; color: #555;">Médecin</p>  <!-- Spécialité du médecin -->
+                        <ul class="list-inline" style="margin-top: 15px; padding-left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+                            <li style="display: flex; align-items: center; width: 100%; word-wrap: break-word; margin-bottom: 10px;">
+                                <i class="fa fa-envelope" style="margin-right: 8px;"></i>
+                                <a href="mailto:foulen.benfalten@example.com" style="word-break: break-word; max-width: 100%;">Foulen.benfalten@example.com</a>  <!-- Email du médecin -->
+                            </li>
+                            <li style="display: flex; align-items: center; width: 100%;">
+                                <i class="fa fa-phone" style="margin-right: 8px;"></i>
+                                <a href="tel:+216698765432">+216 6 98 76 54 32</a>  <!-- Téléphone du médecin -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>		
+    </div>
+</section>
+<!-- Fin de la section "À propos du Médecin" -->
+
+<!-- Section "Contact" -->
+<section id="contact" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                <h2 class="ser-title" style="display: inline-block; margin-bottom: 10px; margin-top: 20px;">Prenez contact avec notre équipe technique</h2>  <!-- Titre de la section Contact -->
+                <hr class="botm-line" style="margin: 0 auto; width: calc(100% - 20px);">  <!-- Ligne de séparation ajustée et centrée -->
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <!-- Informations de contact de l'équipe technique -->
+                <h3>Coordonnées</h3>
+                <div class="space"></div>
+                <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>123 Rue Exemplar<br> Tunisie, 75001</p>  <!-- Adresse -->
+                <div class="space"></div>
+                <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>contact@entreprise.com</p>  <!-- Email de contact -->
+                <div class="space"></div>
+                <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+216 1 23 45 67 89</p>  <!-- Téléphone de contact -->
+            </div>
+            <div class="col-md-8 col-sm-8 marb20">
+                <div class="contact-info">
+                    <h3 class="cnt-ttl">Envoyez-nous votre message, nous sommes à votre écoute !</h3>  <!-- Titre du formulaire de contact -->
+                    <div class="space"></div>
+                    <div id="sendmessage">Votre message a été envoyé. Merci !</div>  <!-- Message de confirmation après envoi -->
+                    <div id="errormessage"></div>  <!-- Message d'erreur en cas de problème avec l'envoi -->
+                    <form action="{% url 'contact' %}" method="post" role="form" class="contactForm" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control br-radius-zero" id="name" placeholder="Votre nom et prénom" data-rule="minlen:4" data-msg="Veuillez entrer au moins 4 caractères" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Votre email" data-rule="email" data-msg="Veuillez entrer un email valide" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control br-radius-zero" name="subject" id="subject" placeholder="Objet" data-rule="minlen:4" data-msg="Veuillez entrer au moins 4 caractères pour l'objet" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="S'il vous plaît, écrivez quelque chose" placeholder="Message"></textarea>
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-action">
+                            <button type="submit" class="btn btn-form">Envoyer</button>
+                        </div>
+                        {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                    <p class="message {{ message.tags }}">{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                    </form>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function validateForm() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var subject = document.getElementById('subject').value;
+        var message = document.getElementById('message').value;
+
+        // Vérification si les champs sont remplis
+        if (name === "" || email === "" || subject === "" || message === "") {
+            alert("Tous les champs doivent être remplis.");
+            return false; // Empêche l'envoi du formulaire
+        }
+        return true; // Permet l'envoi du formulaire si tous les champs sont remplis
+    }
+</script>
+<style>
+    .message.error {
+    color: red;
+    font-size: 1.3rem;
+}
+.message.success {
+    color: green;
+    font-size: 1.3rem;
+}
+
+</style>
+
+
+{% endblock %}  <!-- Fin du bloc 'banner_content' -->

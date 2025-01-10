@@ -1,0 +1,35 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<center>  <!-- Aligne tout le contenu à l'intérieur du conteneur au centre -->
+  <div style=" margin-bottom: 72px;">  <!-- Ajoute un espace de 72px au-dessus -->
+  <h3>Veuillez choisir une date de rendez-vous</h3>  <!-- Titre de la page pour inviter l'utilisateur à choisir une date de rendez-vous -->
+  <br>  <!-- Saut de ligne pour espacer le titre du formulaire -->
+
+  <!-- Affichage des erreurs non spécifiques (par exemple, erreur après 18h00) -->
+  {% if form.non_field_errors %}  <!-- Vérifie s'il y a des erreurs non liées à un champ spécifique -->
+    <div class="alert alert-danger">  <!-- Affiche une boîte d'alerte de type 'danger' pour les erreurs -->
+      <!-- Affichage de chaque erreur sans crochets et guillemets -->
+      {% for error in form.non_field_errors %}  <!-- Boucle sur chaque erreur non liée à un champ -->
+        <p>{{ error }}</p>  <!-- Affichage de l'erreur sous forme de paragraphe -->
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Formulaire -->
+  <form method="post">  <!-- Formulaire avec la méthode 'POST' pour envoyer les données -->
+    {% csrf_token %}  <!-- Protection contre les attaques CSRF (Cross-Site Request Forgery) -->
+    
+    <!-- Affichage de chaque champ et de ses erreurs -->
+    {% for field in form %}  <!-- Boucle sur chaque champ du formulaire -->
+      <div class="form-group">  <!-- Conteneur pour chaque champ, avec un espacement autour -->
+        {{ field.label }}  <!-- Affichage de l'étiquette du champ -->
+        {{ field }}  <!-- Affichage du champ du formulaire -->
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>  <!-- Bouton pour soumettre le formulaire avec la classe 'btn btn-primary' -->
+  </form>
+</center>
+</div>
+{% endblock %}  <!-- Fin du bloc 'content' -->

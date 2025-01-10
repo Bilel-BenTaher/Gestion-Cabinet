@@ -1,0 +1,74 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<section class="vh-100 d-flex justify-content-center align-items-center"style="min-height: 70vh;>
+    <div class="container">
+        <div class="row">
+            <div class="text-black">
+                <div class="d-flex justify-content-center align-items-center">
+                    <center>
+                        <form method="post" style="width: 28rem; border-radius: 10px; padding: 2rem; background: linear-gradient(135deg, rgba(28, 74, 90, 0.9), rgba(28, 74, 90, 0.3)); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                            {% csrf_token %}
+
+                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: #fff; font-size: 2.5rem;">Se connecter</h3>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p style="color: red; font-size: 1rem;">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+
+                            <div class="form-group mb-4">
+                                <label for="username" style="color: #fff; font-size: 1.5rem;">Nom d'utilisateur</label>
+                                <input type="text" id="username" name="username" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="password" style="color: #fff; font-size: 1.5rem;">Mot de passe</label>
+                                <input type="password" id="password" name="password" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <div class="pt-1 mb-4">
+                                <button type="submit" class="btn btn-lg btn-block" style="background-color: rgba(28,74,90, 0.9); color: #fff; border: none; border-radius: 5px; transition: background-color 0.3s;">
+                                    Se connecter
+                                </button>
+                            </div>
+
+                            <p class="small mb-5 pb-lg-2">
+                                <a class="text-muted"style="color: #fff;" href="/forgot-password">Mot de passe oublié ?</a>
+                            </p>
+                            <p style="color: #fff; font-size: 1.4rem;">
+                                Vous n'avez pas de compte ? <br>
+                                <a href="/signup" class="link-info"style="color: #fff;">S'inscrire ici</a>
+                            </p>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ajout de styles supplémentaires pour l'animation du bouton -->
+<style>
+    .btn:hover {
+        background-color: #5a5a5a;
+        cursor: pointer;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-size: 1.1rem;
+        color: #fff;
+    }
+</style>
+
+
+{% endblock %}  <!-- Fin du bloc 'content' -->

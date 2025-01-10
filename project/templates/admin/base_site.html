@@ -1,0 +1,159 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    MedDoc+  
+{% endblock %}
+
+{% block branding %}
+    {% load static %}
+    <a class="navbar-brand" href="/admin">
+        <!-- Affichage du logo dans la barre de navigation -->
+        <img src="{% static 'img/logo1.png' %}" alt="Logo" class="img-responsive" style="width: 140px;">
+    </a>
+{% endblock %}
+
+{% block nav-global %}
+    <nav>
+        <ul>
+            <!-- Liens de navigation -->
+            <li><a href="/admin" class="nav-link">ACCUEIL</a></li>
+            <li><a href="/logout" class="nav-link">DÉCONNEXION</a></li>
+            <li><a href="/#contact" class="nav-link">CONTACT</a></li>
+            <li><a href="{% url 'admin:password_change' %}" class="nav-link">MODIFICATION DU MOT DE PASSE</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block userlinks %}
+    <!-- Personnalisation des liens utilisateur (ex. lien vers le profil) -->
+{% endblock %}
+
+{% block sidebar %}
+    <!-- Masquer la barre latérale pour personnaliser la vue d'administration -->
+{% endblock %}
+
+{% block content %}
+    <!-- Contenu principal de la page -->
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <!-- Pied de page personnalisé -->
+        <p>© Copyright MedDoc+. Tous droits réservés</p>
+    </footer>
+{% endblock %}
+
+{% block extrahead %}
+    {% load static %}
+    <!-- Définir l'icône de la page (favicon) -->
+    <link rel="icon" href="{% static 'img/logo1.png' %}" type="image/png">
+    
+    <style>
+        /* Masquer les outils utilisateur sur le site */
+        #user-tools, .user-tools {
+            display: none !important;
+        }
+
+        /* Couleur de fond du site */
+        body {
+            background-color: #fdfcfc;
+        }
+
+        /* Style pour le menu de navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav .nav-link {
+            text-decoration: none !important;  /* Supprimer tout soulignement */
+            color: #ffffff !important;  /* Couleur du texte */
+            padding: 20px 10px !important;  /* Espacement du texte */
+            border-radius: 8px !important;  /* Coins arrondis */
+            transition: background-color 0.3s, color 0.3s !important; /* Effet de transition */
+            display: inline-block !important;  /* Respecter le padding */
+            border: none !important;  /* Pas de bordure */
+            outline: none !important;  /* Supprimer la bordure de focus */
+        }
+
+        /* Effet au survol (hover) */
+        nav .nav-link:hover {
+            background-color: #256b83;  /* Fond bleu */
+            color: #fff;  /* Texte blanc */
+        }
+
+        /* Simuler la classe active */
+        nav .nav-link.active {
+            background-color: #256b83;  /* Fond bleu */
+            color: #fff;  /* Texte blanc */
+        }
+
+        /* Positionnement du footer pour qu'il soit en bas */
+        main {
+            flex: 1;
+        }
+
+        /* Design du footer */
+        footer {
+            text-align: center;
+            background-color: #185c72;  /* Bleu uniforme */
+            color: #fff;  /* Texte en blanc */
+            padding: 15px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;  /* Enlever les marges internes */
+        }
+
+        /* Couleur des titres */
+        h1 {
+            color: #1c4a5a;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentPath = window.location.pathname + (window.location.hash || ""); // Inclure le fragment (#contact)
+            const links = document.querySelectorAll("nav .nav-link");
+
+            links.forEach(link => {
+                const linkPath = link.getAttribute("href");
+
+                // Cas particulier pour la page de modification du mot de passe
+                if (currentPath === linkPath || 
+                    (currentPath.startsWith("/admin/password_change") && linkPath === "{% url 'admin:password_change' %}")) {
+                    link.classList.add("active");  // Ajoute la classe active pour la page en cours
+                } else if (currentPath.startsWith(linkPath)) {
+                    link.classList.add("active");  // Ajoute la classe active pour la page en cours
+                } else {
+                    link.classList.remove("active");  // Retire la classe active des autres liens
+                }
+
+                // Cas particulier : désactiver tous les autres liens quand on est sur la page de changement de mot de passe
+                if (currentPath.startsWith("/admin/password_change") && linkPath !== "{% url 'admin:password_change' %}") {
+                    link.classList.remove("active"); // Désactive tous les autres liens
+                }
+            });
+
+            // Ajouter un événement de clic pour que les changements soient visibles immédiatement
+            links.forEach(link => {
+                link.addEventListener("click", function () {
+                    // Supprimer la classe active de tous les liens
+                    links.forEach(l => l.classList.remove("active"));
+
+                    // Ajouter la classe active au lien cliqué
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

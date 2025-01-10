@@ -1,0 +1,15 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block title %}Logout{% endblock %}  <!-- Définit le titre de la page à "Logout", qui sera affiché dans l'onglet du navigateur -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<center>  <!-- Aligne tout le contenu à l'intérieur du conteneur au centre -->
+  <h2>Logout</h2>  <!-- Titre de la page "Logout" -->
+  <br>  <!-- Saut de ligne pour espacer le titre du formulaire -->
+  
+  <form method="post" action="{% url 'logout' %}">  <!-- Formulaire avec la méthode 'POST', qui enverra les données à l'URL de déconnexion 'logout' -->
+    {% csrf_token %}  <!-- Protection contre les attaques CSRF (Cross-Site Request Forgery) -->
+    <button type="submit">Logout</button>  <!-- Bouton pour soumettre le formulaire, permettant de se déconnecter -->
+  </form>
+</center>
+{% endblock %}  <!-- Fin du bloc 'content' -->

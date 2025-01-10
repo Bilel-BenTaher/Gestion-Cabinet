@@ -1,0 +1,11 @@
+# Ignorer la base de données
+db.sqlite3
+*.sqlite3
+
+# Ignorer les environnements virtuels
+env/
+venv/
+
+# Ignorer les fichiers de configuration
+.env
+"project/project/settings.py" 

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block title %}Panel{% endblock %}  <!-- Définit le titre de la page, qui sera affiché dans l'onglet du navigateur -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<center>  <!-- Aligne tout le contenu à l'intérieur du conteneur au centre -->
+
+  <div class="container">  <!-- Conteneur pour le formulaire, afin de gérer la mise en page -->
+  <form method="post" class="form-horizontal">  <!-- Formulaire avec la méthode 'POST' pour envoyer les données, en utilisant un style horizontal pour les champs de formulaire -->
+   <div class="form-group">  <!-- Conteneur pour les éléments du formulaire -->
+  
+    {% csrf_token %}  <!-- Protection contre les attaques CSRF (Cross-Site Request Forgery) -->
+    
+    {% for field in form %}  <!-- Boucle sur chaque champ du formulaire -->
+        <p>  <!-- Balise <p> pour chaque champ -->
+          {{ field.label_tag }}<br>  <!-- Affiche l'étiquette (label) du champ de formulaire -->
+          {{ field }}  <!-- Affiche le champ de formulaire lui-même -->
+        
+          {% for error in field.errors %}  <!-- Si des erreurs sont présentes pour ce champ -->
+            <p style="color: red">{{ error }}</p>  <!-- Affiche chaque erreur en rouge -->
+          {% endfor %}
+        </p>
+      {% endfor %}
+  
+   </div>  <!-- Fin du groupe de formulaire pour les champs -->
+
+        <div class="form-group">  <!-- Groupe de formulaire pour le bouton de soumission -->
+      <input type="submit" class="btn btn-primary" value="Submit" />  <!-- Bouton de soumission du formulaire avec la classe 'btn btn-primary' pour un bouton stylé -->
+       </div>  <!-- Fin du groupe de formulaire pour le bouton -->
+  </form>  <!-- Fin du formulaire -->
+  </div>  <!-- Fin du conteneur -->
+
+</center>  <!-- Fermeture du centrage -->
+
+{% endblock %}  <!-- Fin du bloc 'content' -->

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Meta informations de la page -->
+    <meta charset="utf-8"> <!-- Définit l'encodage des caractères (UTF-8), important pour l'internationalisation. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Rend la page responsive en ajustant la largeur au dispositif. -->
+    <meta name="description" content="Cette application a pour objectif de simplifier et d'optimiser la gestion des rendez-vous et des opérations administratives du cabinet."> <!-- Description de la page pour les moteurs de recherche. -->
+    <title>MedDoc+</title> <!-- Titre de la page, qui s'affichera dans l'onglet du navigateur. -->
+    
+    {% load static %}
+    <link rel="icon" href="{% static 'img/logo1.png' %}" type="image/png"> <!-- Favicon ajouté -->
+    
+    <!-- Chargement des fichiers statiques via Django template tags -->
+    <script src="{% static 'js/jquery.min.js' %}"></script> <!-- Chargement de la bibliothèque jQuery. -->
+    <script src="{% static 'js/moment-with-locales.js' %}"></script> <!-- Bibliothèque moment.js pour la gestion des dates et heures. -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Chargement du script Bootstrap pour les composants interactifs. -->
+    <script src="{% static 'js/bootstrap-datetimepicker.js' %}"></script> <!-- Composant pour le picker de date et heure (datetime picker). -->
+    <script src="{% static 'js/jquery-ui.js' %}"></script> <!-- Bibliothèque jQuery UI pour des widgets interactifs. -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- Animation Easing pour des transitions fluides. -->
+    <script src="{% static 'js/custom.js' %}"></script> <!-- Script JavaScript personnalisé pour des fonctionnalités supplémentaires. -->
+    
+    <!-- Liens vers les fichiers CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.css' %}" /> <!-- Style pour le datetime picker. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal"> <!-- Polices Google Fonts. -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"> <!-- Font Awesome pour les icônes. -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> <!-- Styles Bootstrap. -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Styles CSS personnalisés. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Ajouter le lien vers la bibliothèque Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+
+  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!-- Section Banner -->
+    <section id="banner" class="banner">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <!-- Menu burger pour mobile -->
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!-- Logo de la page -->
+              <a class="navbar-brand" href="/"><img src="{% static 'img/logo1.png' %}" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
+            </div>
+
+            <!-- Affichage du nom de l'utilisateur si connecté -->
+            {% if user.username %}
+              Bonjour,{{ user.first_name }} <!-- Affiche le nom d'utilisateur si connecté -->
+            {% endif %}
+            
+            <!-- Menu de navigation -->
+            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <!-- Lien d'accueil -->
+                <li id="home-link" class="{% if request.path == '/' and not request.GET %}active{% endif %}">
+                  <a href="/">Page d'accueil</a>
+                </li>
+
+                <!-- Lien vers la section "À propos" -->
+                <li id="about-link">
+                  <a href="/#about" onclick="setActiveLink('about-link')">À propos</a>
+                </li>
+
+                <!-- Lien vers la section "Contact" -->
+                <li id="contact-link">
+                  <a href="/#contact" onclick="setActiveLink('contact-link')">Contact</a>
+                </li>
+
+                <!-- Liens dynamiques en fonction de l'état de l'utilisateur -->
+                {% if request.user.is_staff %}
+                  <li id="admin-link" class="{% if '/admin' in request.path %}active{% endif %}">
+                    <a href="/admin">Espace personnel</a>
+                  </li>
+                  <li id="logout-link" class="{% if '/logout' in request.path %}active{% endif %}">
+                    <a href="/logout">Déconnexion</a>
+                  </li>
+                {% elif request.user.is_authenticated %}
+                  <li id="panel-link" class="{% if '/panel' in request.path %}active{% endif %}">
+                    <a href="/panel">Gérer le rendez-vous</a>
+                  </li>
+                  <li id="logout-link" class="{% if '/logout' in request.path %}active{% endif %}">
+                    <a href="/logout">Déconnexion</a>
+                  </li>        
+                {% else %}
+                  <li id="login-link" class="{% if '/login' in request.path %}active{% endif %}">
+                    <a href="/login">Se connecter</a>
+                  </li>
+                  <li id="signup-link" class="{% if '/signup' in request.path %}active{% endif %}">
+                    <a href="/signup">S'inscrire</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+
+            <!-- Script pour gérer les liens actifs lors des clics et du scroll -->
+            <script>
+              function setActiveLink(activeLinkId) {
+                document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
+                document.getElementById(activeLinkId).classList.add('active');
+              }
+
+              window.addEventListener('scroll', function () {
+                const aboutSection = document.querySelector('#about');
+                const contactSection = document.querySelector('#contact');
+                const scrollPosition = window.scrollY;
+
+                if (document.querySelector('.nav li.active') && !['about-link', 'contact-link', 'home-link'].includes(document.querySelector('.nav li.active').id)) {
+                  return;
+                }
+
+                document.querySelectorAll('#home-link, #about-link, #contact-link').forEach(link => link.classList.remove('active'));
+
+                if (aboutSection && scrollPosition >= aboutSection.offsetTop && scrollPosition < contactSection.offsetTop) {
+                  document.getElementById('about-link').classList.add('active');
+                } else if (contactSection && scrollPosition >= contactSection.offsetTop) {
+                  document.getElementById('contact-link').classList.add('active');
+                } else {
+                  document.getElementById('home-link').classList.add('active');
+                }
+              });
+            </script>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Contenu spécifique de la bannière -->
+      {% block banner_content %}{% endblock %}
+    </section>
+    
+    <!-- Section principale -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Modern Footer -->
+<footer id="footer" style="background: rgba(28,74,90, 0.9); color: #ddd; font-family: Arial, sans-serif; padding-top: 40px;">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <!-- About Us Section -->
+      <div class="col-md-4 col-sm-12 mb-4">
+        <h4 style="color: #fff; font-weight: bold; margin-bottom: 20px;">À propos de nous</h4>
+        <p style="line-height: 1.8; color: #fff;">
+          Nous développons des solutions innovantes pour simplifier la gestion des rendez-vous et des tâches administratives des cabinets médicaux.
+        </p>
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="col-md-4 col-sm-12 mb-4">
+        <h4 style="color: #fff; font-weight: bold; margin-bottom: 20px;">Liens utiles</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="/" style="color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;"><i class="fa fa-home" style="margin-right: 8px;"></i>Page d'accueil</a></li>
+          <li><a href="#about" style="color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;"><i class="fa fa-info-circle" style="margin-right: 8px;"></i>À propos</a></li>
+          <li><a href="#contact" style="color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;"><i class="fa fa-envelope" style="margin-right: 8px;"></i>Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="col-md-4 col-sm-12">
+        <h4 style="color: #fff; font-weight: bold; margin-bottom: 20px;">Suivez-nous</h4>
+        <div style="display: flex; justify-content: center; gap: 15px;">
+            <!-- Facebook -->
+            <a href="#" style="color: #4267B2;">
+                <i class="fab fa-facebook-square fa-2x" style="font-size: 24px;"></i>
+            </a>
+            <!-- Google -->
+            <a href="#" style="color: #EA4335;">
+                <i class="fab fa-google fa-2x" style="font-size: 24px;"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" style="color: #0077B5;">
+                <i class="fab fa-linkedin fa-2x" style="font-size: 24px;"></i>
+            </a>
+        </div>
+    </div>    
+    </div>
+  </div>
+
+  <!-- Footer Bottom Line -->
+  <div style="border-top: 1px solid #444; background: rgba(24, 63, 77, 0.9); margin-top: 20px; padding: 10px 0; text-align: center; color: #fff;">
+    © 2025 MedDoc+ Tous droits réservés
+  </div>
+</footer>
+  </body>
+</html>

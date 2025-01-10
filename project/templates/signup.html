@@ -1,0 +1,130 @@
+{% extends 'base.html' %}  <!-- Cette ligne permet d'étendre le modèle de base 'base.html' -->
+
+{% block content %}  <!-- Définition du bloc 'content' qui sera rempli dans la page HTML étendue -->
+<section class="vh-100 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-black">
+                <div class="d-flex justify-content-center align-items-center">
+                    <center>
+                        <form method="post" style="width: 35rem; border-radius: 10px; padding: 2rem; background: linear-gradient(135deg, rgba(28, 74, 90, 0.9), rgba(28, 74, 90, 0.3)); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                            {% csrf_token %}
+                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: #fff; font-size: 2.5rem;">S'inscrire</h3>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p style="color: red; font-size: 1rem;">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+
+                            <!-- Champ Nom d'utilisateur -->
+                            <div class="form-group mb-4">
+                                <label for="id_username" style="color: #fff; font-size: 1.5rem;">Nom d'utilisateur</label>
+                                <input type="text" id="id_username" name="username" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;" placeholder="format : prénom-nom-dd-mm-année">
+                            </div>
+
+                            <!-- Champ Prénom -->
+                            <div class="form-group mb-4">
+                                <label for="id_first_name" style="color: #fff; font-size: 1.5rem;">Prénom</label>
+                                <input type="text" id="id_first_name" name="first_name" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ Nom -->
+                            <div class="form-group mb-4">
+                                <label for="id_last_name" style="color: #fff; font-size: 1.5rem;">Nom</label>
+                                <input type="text" id="id_last_name" name="last_name" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ Âge -->
+                            <div class="form-group mb-4">
+                                <label for="id_age" style="color: #fff; font-size: 1.5rem;">Âge</label>
+                                <input type="number" id="id_age" name="age" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+                                                     
+                            <!-- Champ Numéro de téléphone -->
+                            <div class="form-group mb-4">
+                                <label for="id_phone" style="color: #fff; font-size: 1.5rem;">Numéro de téléphone</label>
+                                <input type="tel" id="id_phone" name="phone" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ email -->
+                            <div class="form-group mb-4">
+                                <label for="id_email" style="color: #fff; font-size: 1.5rem;">Adresse e-mail</label>
+                                <input type="email" id="id_email" name="email" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ Mot de passe -->
+                            <div class="form-group mb-4">
+                                <label for="id_password1" style="color: #fff; font-size: 1.5rem;">Mot de passe</label>
+                                <input type="password" id="id_password1" name="password1" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ Confirmer le mot de passe -->
+                            <div class="form-group mb-4">
+                                <label for="id_password2" style="color: #fff; font-size: 1.5rem;">Confirmer le mot de passe</label>
+                                <input type="password" id="id_password2" name="password2" class="form-control" style="padding: 0.8rem; font-size: 1.5rem; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Champ Genre -->
+                            <div class="form-group mb-4">
+                                <label for="id_gender" style="color: #fff; font-size: 1.5rem;">Genre</label>
+                                <div class="d-flex">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="M">
+                                        <label class="form-check-label" for="male" style="color: #fff; font-size: 1.5rem; margin-right: 10px;">Homme</label>
+                                        <input class="form-check-input" type="radio" id="female" name="gender" value="F">
+                                        <label class="form-check-label" for="female" style="color: #fff; font-size: 1.5rem;">Femme</label>
+                                    </div>                                    
+                                </div>
+                            </div>
+
+                            <!-- Bouton Soumettre -->
+                            <div class="pt-1 mb-4">
+                                <button type="submit" class="btn btn-lg btn-block" style="background-color: rgba(28,74,90, 0.9); color: #fff; border: none; border-radius: 5px; transition: background-color 0.3s;">
+                                    S'inscrire
+                                </button>
+                            </div>
+                             
+                            <p style="color: #fff; font-size: 1.4rem;">
+                                Vous avez déjà un compte ? <br>
+                                <a href="/login" class="link-info"style="color: #fff;">Connectez-vous ici.</a>
+                            </p>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Ajout de styles supplémentaires -->
+<style>
+    .btn:hover {
+        background-color: #5a5a5a;
+        cursor: pointer;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    .form-control:focus {
+        border-color: #ff6600;
+        box-shadow: 0 0 8px rgba(255, 102, 0, 0.7);
+        outline: none;
+    }
+</style>
+
+
+
+{% endblock %}  <!-- Fin du bloc 'content' -->
