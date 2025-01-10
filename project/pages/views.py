@@ -246,7 +246,7 @@ def forgot_password(request):
             msg = EmailMessage(
                 "Récupération de mot de passe",
                 html_text,
-                "MedDoc+<bilelbentaher9@gmail.com>",  # Adresse email de l'expéditeur
+                  # Adresse email de l'expéditeur
                 [user.email],  # Adresse email du destinataire
             )
 
@@ -351,8 +351,7 @@ def contact_view(request):
         send_mail(
             subject,
             full_message,
-            f"{name}<bilelbentaher9@gmail.com>",  # Adresse email de l'expéditeur
-            ['bilelbentaher9@gmail.com'],
+            
            
         )
 
