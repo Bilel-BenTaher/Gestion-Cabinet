@@ -1,11 +1,30 @@
-# Ignorer la base de données
+# Exclure les fichiers de base de données
 db.sqlite3
 *.sqlite3
 
-# Ignorer les environnements virtuels
+# Exclure les dossiers des bibliothèques Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Exclure les fichiers de logs
+*.log
+
+# Exclure les environnements virtuels
 env/
 venv/
 
-# Ignorer les fichiers de configuration
+# Exclure les fichiers de configuration d'IDE (si applicable)
+.vscode/
+.idea/
+
+# Exclure les fichiers de migration compilés (facultatif)
+*/migrations/*.pyc
+
+# Exclure les fichiers secrets
 .env
-"project/project/settings.py" 
+*.env
+
+# Exclure tout fichier spécifique que vous souhaitez
+votre_fichier_personnalisé
