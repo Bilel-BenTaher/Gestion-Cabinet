@@ -25,7 +25,7 @@ Ce projet est une **application web** dédiée à la gestion d’un cabinet dent
 ## **Installation et exécution**
 1. **Clonez le dépôt** :
    ```bash
-   git clone https://github.com/Bilel-BenTaher/gestion-cabinet-dentaire.git
+   git clone https://github.com/Bilel-BenTaher/Gestion-Cabinet.git
    ```
 2. **Installez les dépendances** :
    ```bash
