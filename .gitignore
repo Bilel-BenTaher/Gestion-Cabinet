@@ -26,5 +26,4 @@ venv/
 .env
 *.env
 # Ignorer les fichiers de bibliothèques Python
-Lib/
-site-packages/
+Lib/site-packages/
