@@ -15,11 +15,11 @@ __pycache__/
 env/
 venv/
 
-# Exclure les fichiers de configuration d'IDE (si applicable)
+# Exclure les fichiers de configuration d'IDE 
 .vscode/
 .idea/
 
-# Exclure les fichiers de migration compilés (facultatif)
+# Exclure les fichiers de migration compilés 
 */migrations/*.pyc
 
 # Exclure les fichiers secrets
