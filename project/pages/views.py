@@ -246,7 +246,7 @@ def forgot_password(request):
             msg = EmailMessage(
                 "Récupération de mot de passe",
                 html_text,
-                  # Adresse email de l'expéditeur
+                # Adresse email de l'expéditeur
                 [user.email],  # Adresse email du destinataire
             )
 
@@ -352,7 +352,7 @@ def contact_view(request):
             subject,
             full_message,
             
-           
+
         )
 
         messages.success(request, 'Merci pour votre message. Nous vous contacterons bientôt.')

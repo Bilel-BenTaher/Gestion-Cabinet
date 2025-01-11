@@ -25,5 +25,4 @@ venv/
 # Exclure les fichiers secrets
 .env
 *.env
-# Ignorer les fichiers de bibliothèques Python
-Lib/site-packages/
+
