@@ -4,6 +4,12 @@ Ce projet est une application web dédiée à la gestion d’un cabinet médical
 
 ---
 
+## **Vidéo de Présentation**
+
+Découvrez une démonstration du projet en vidéo : [Voir la vidéo](https://www.linkedin.com/feed/update/urn:li:activity:7285259861129351170/)
+
+---
+
 ## **Fonctionnalités Principales**
 
 - **Gestion des utilisateurs** : Ajout, modification et suppression des comptes utilisateur avec des rôles spécifiques.  
